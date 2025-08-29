@@ -1,3 +1,5 @@
+const tableContents = document.querySelector('table tbody');
+
 const myLibrary = [];
 
 /**
@@ -36,4 +38,51 @@ function Book(title, author, genre, pages, read) {
 function addBookToLibrary(title, author, genre, pages, read) {
     const book = new Book(title, author, genre, pages, read);
     myLibrary.push(book);
+}
+
+/**
+ *
+ * @returns {HTMLDivElement}
+ */
+function createActionButtons() {
+    const buttonsContainer = document.createElement('div');
+
+    const readButton = document.createElement('button');
+    const deleteButton = document.createElement('button');
+
+    readButton.textContent = 'Read';
+    deleteButton.textContent = 'Delete';
+    buttonsContainer.appendChild(readButton);
+    buttonsContainer.appendChild(deleteButton);
+
+    return buttonsContainer;
+}
+
+/**
+ *
+ * @param book
+ * @returns {HTMLTableRowElement}
+ */
+function creatTableRow(book) {
+    const tableRow = document.createElement('tr');
+
+    const keysToIterate= ["title", "author", "genre", "pages", "read"];
+
+    for (let key of keysToIterate) {
+         const tableData = document.createElement('td');
+         tableData.textContent = book[key];
+
+         tableRow.appendChild(tableData);
+    }
+
+    tableRow.appendChild(createActionButtons());
+
+    return tableRow;
+}
+
+function displayAllBooks() {
+    for (let book of myLibrary) {
+        const tableRow = creatTableRow(book);
+        tableContents.appendChild(tableRow);
+    }
 }
