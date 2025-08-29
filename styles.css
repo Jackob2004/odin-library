@@ -3,6 +3,8 @@
     --pallete-light-grey: #AF8F6F;
     --pallete-grey: #74512D;
     --pallete-dark-grey: #543310;
+
+    --border-radius: 15px;
 }
 
 html {
@@ -31,7 +33,7 @@ body {
 .header .show-modal {
     font-weight: bold;
     border: none;
-    border-radius: 15px;
+    border-radius: var(--border-radius);
     background-color: #376b40;
     color: var(--pallete-cream);
     padding: 16px 32px;
@@ -41,7 +43,7 @@ body {
 dialog {
     margin: auto;
     border: none;
-    border-radius: 15px;
+    border-radius: var(--border-radius);
     padding: 50px;
     box-shadow: 4px 8px 8px #00000061;
 }
@@ -70,7 +72,7 @@ form div {
 form button {
     padding: 6px 24px;
     border: none;
-    border-radius: 15px;
+    border-radius: var(--border-radius);
 }
 
 #cancel-btn {
@@ -94,7 +96,7 @@ input[type=checkbox] {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-/* Minimal table styling */
+/* Table styling */
 table {
     margin: auto;
     table-layout: fixed;
@@ -129,4 +131,39 @@ tr:nth-child(odd) td {
 
 caption {
     padding: 10px;
+}
+
+td:hover {
+    opacity: 0.7;
+    font-weight: bold;
+}
+
+/* table action buttons  */
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+table button {
+    border: none;
+    border-radius: var(--border-radius);
+    width: 80px;
+    color: var(--pallete-cream);
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.delete-btn {
+    background-color: #7d1e1e;
+}
+
+.read-btn {
+    background-color: grey;
+}
+
+button:hover {
+    cursor: pointer;
+    opacity: 0.7;
 }

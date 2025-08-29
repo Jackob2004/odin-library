@@ -68,6 +68,8 @@ function createActionButtons(bookId) {
     deleteButton.dataset.bookId = bookId;
     deleteButton.classList.add('delete-btn');
 
+    buttonsContainer.classList.add('action-buttons');
+
     buttonsContainer.appendChild(readButton);
     buttonsContainer.appendChild(deleteButton);
     tableData.appendChild(buttonsContainer);
