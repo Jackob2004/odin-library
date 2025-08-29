@@ -50,10 +50,11 @@ function addBookToLibrary(title, author, genre, pages, read) {
 
 /**
  *
- * @param {string} bookId random book UUID
- * @returns {HTMLDivElement}
+ * @param bookId
+ * @returns {HTMLTableCellElement}
  */
 function createActionButtons(bookId) {
+    const tableData= document.createElement('td');
     const buttonsContainer = document.createElement('div');
 
     const readButton = document.createElement('button');
@@ -69,8 +70,9 @@ function createActionButtons(bookId) {
 
     buttonsContainer.appendChild(readButton);
     buttonsContainer.appendChild(deleteButton);
+    tableData.appendChild(buttonsContainer);
 
-    return buttonsContainer;
+    return tableData;
 }
 
 /**
@@ -122,6 +124,10 @@ function showModal() {
     modalDialog.showModal();
 }
 
+/**
+ *
+ * @param event
+ */
 function handleActionButton(event) {
     const bookId = event.target.dataset.bookId;
     if (bookId === undefined) return;
