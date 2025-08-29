@@ -3,6 +3,7 @@
     --pallete-light-grey: #AF8F6F;
     --pallete-grey: #74512D;
     --pallete-dark-grey: #543310;
+    --pallete-green: #376b40;
 
     --border-radius: 15px;
 }
@@ -34,7 +35,7 @@ body {
     font-weight: bold;
     border: none;
     border-radius: var(--border-radius);
-    background-color: #376b40;
+    background-color: var(--pallete-green);
     color: var(--pallete-cream);
     padding: 16px 32px;
 }
@@ -46,12 +47,15 @@ dialog {
     border-radius: var(--border-radius);
     padding: 50px;
     box-shadow: 4px 8px 8px #00000061;
+    background-color: var(--pallete-cream);
+    color: var(--pallete-dark-grey);
 }
 
 form {
     display: grid;
     grid-template-columns: min-content 1fr;
     gap: 20px;
+    align-items: center;
 }
 
 form p {
@@ -73,6 +77,8 @@ form button {
     padding: 6px 24px;
     border: none;
     border-radius: var(--border-radius);
+    font-weight: bold;
+    color: var(--pallete-cream);
 }
 
 #cancel-btn {
@@ -80,7 +86,7 @@ form button {
 }
 
 #confirm-btn {
-    background-color: #258925;
+    background-color: var(--pallete-green);
 }
 
 label {
@@ -88,12 +94,29 @@ label {
     font-weight: bold;
 }
 
-input[type=checkbox] {
+input:not([type="checkbox"]) {
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--pallete-light-grey);
+    color: var(--pallete-cream);
+    padding: 5px 10px;
+    font-weight: 600;
+
+    outline: none;
+}
+
+input:not([type="checkbox"]):focus {
+    outline: 2px grey dotted;
+    outline-offset: 2px;
+}
+
+input[type="checkbox"] {
     justify-self: start;
 }
 
 ::backdrop {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: var(--pallete-cream);
+    opacity: 0.8;
 }
 
 /* Table styling */
