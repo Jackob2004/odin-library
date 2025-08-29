@@ -31,6 +31,10 @@ function Book(title, author, genre, pages, read) {
     this.id = crypto.randomUUID();
 }
 
+Book.prototype.toggleReadStatus = function() {
+    this.read = !this.read;
+};
+
 /**
  *
  * @param {string} title
@@ -56,6 +60,9 @@ function createActionButtons(bookId) {
     const deleteButton = document.createElement('button');
 
     readButton.textContent = 'Read';
+    readButton.dataset.bookId = bookId;
+    readButton.classList.add('read-btn');
+
     deleteButton.textContent = 'Delete';
     deleteButton.dataset.bookId = bookId;
     deleteButton.classList.add('delete-btn');
@@ -125,6 +132,8 @@ function handleActionButton(event) {
 
     if (event.target.classList.contains('delete-btn')) {
         myLibrary.splice(bookIdx, 1);
+    } else if (event.target.classList.contains('read-btn')) {
+        myLibrary[bookIdx].toggleReadStatus();
     }
 
     displayAllBooks();
