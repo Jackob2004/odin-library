@@ -2,13 +2,68 @@ html {
     font-family: sans-serif;
 }
 
+body {
+    position: relative;
+    height: 100vh;
+}
+
+/* dialog form */
+dialog {
+    margin: auto;
+    border: none;
+    border-radius: 15px;
+    padding: 50px;
+    box-shadow: 4px 8px 8px #00000061;
+}
+
+form {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    gap: 20px;
+}
+
+form p {
+    justify-self: center;
+    grid-column: 1 / 3;
+
+    padding: 10px;
+}
+
+form div {
+    justify-self: center;
+    grid-column: 1 / 3;
+
+    display: flex;
+    gap: 20px;
+}
+
+form button {
+    padding: 6px 24px;
+    border: none;
+    border-radius: 15px;
+}
+
+#cancel-btn {
+    background-color: #d7b15a;
+}
+
+#confirm-btn {
+    background-color: #258925;
+}
+
+label {
+    justify-self: end;
+    font-weight: bold;
+}
+
+input[type=checkbox] {
+    justify-self: start;
+}
 
 ::backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.1);
 }
-label {
-    display: block;
-}
+
 /* Minimal table styling */
 table {
     border-collapse: collapse;

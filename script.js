@@ -106,12 +106,12 @@ function handleFormSubmit() {
     form.reset();
 }
 
-function cancelModal() {
-    modalDialog.close();
+function showModal() {
     form.reset();
+    modalDialog.showModal();
 }
 
-showModalBtn.addEventListener('click', () => modalDialog.showModal());
-document.querySelector('#cancel-btn').addEventListener('click', cancelModal);
+showModalBtn.addEventListener('click', showModal);
+document.querySelector('#cancel-btn').addEventListener('click', () => modalDialog.close());
 
 form.addEventListener('submit', handleFormSubmit);
