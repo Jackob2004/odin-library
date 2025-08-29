@@ -2,6 +2,13 @@ html {
     font-family: sans-serif;
 }
 
+
+::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+label {
+    display: block;
+}
 /* Minimal table styling */
 table {
     border-collapse: collapse;

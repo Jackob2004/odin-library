@@ -1,5 +1,9 @@
 const tableContents = document.querySelector('table tbody');
 
+const modalDialog = document.querySelector('dialog');
+const showModalBtn = document.querySelector('button.show-modal');
+const form = document.querySelector('form');
+
 const myLibrary = [];
 
 /**
@@ -81,8 +85,33 @@ function creatTableRow(book) {
 }
 
 function displayAllBooks() {
+    tableContents.innerHTML = '';
+
     for (let book of myLibrary) {
         const tableRow = creatTableRow(book);
         tableContents.appendChild(tableRow);
     }
 }
+
+function handleFormSubmit() {
+    const formData = new FormData(form);
+
+    addBookToLibrary(formData.get("title"),
+        formData.get("author"),
+        formData.get("genre"),
+        +formData.get("pages"),
+        formData.get("read") === "on");
+
+    displayAllBooks();
+    form.reset();
+}
+
+function cancelModal() {
+    modalDialog.close();
+    form.reset();
+}
+
+showModalBtn.addEventListener('click', () => modalDialog.showModal());
+document.querySelector('#cancel-btn').addEventListener('click', cancelModal);
+
+form.addEventListener('submit', handleFormSubmit);
