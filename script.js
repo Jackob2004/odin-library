@@ -46,9 +46,10 @@ function addBookToLibrary(title, author, genre, pages, read) {
 
 /**
  *
+ * @param {string} bookId random book UUID
  * @returns {HTMLDivElement}
  */
-function createActionButtons() {
+function createActionButtons(bookId) {
     const buttonsContainer = document.createElement('div');
 
     const readButton = document.createElement('button');
@@ -56,6 +57,9 @@ function createActionButtons() {
 
     readButton.textContent = 'Read';
     deleteButton.textContent = 'Delete';
+    deleteButton.dataset.bookId = bookId;
+    deleteButton.classList.add('delete-btn');
+
     buttonsContainer.appendChild(readButton);
     buttonsContainer.appendChild(deleteButton);
 
@@ -79,7 +83,7 @@ function creatTableRow(book) {
          tableRow.appendChild(tableData);
     }
 
-    tableRow.appendChild(createActionButtons());
+    tableRow.appendChild(createActionButtons(book.id));
 
     return tableRow;
 }
@@ -111,7 +115,34 @@ function showModal() {
     modalDialog.showModal();
 }
 
+function handleActionButton(event) {
+    const bookId = event.target.dataset.bookId;
+    if (bookId === undefined) return;
+
+    const bookIdx = myLibrary.findIndex(book => book.id === bookId);
+
+    if (bookIdx < 0) return;
+
+    if (event.target.classList.contains('delete-btn')) {
+        myLibrary.splice(bookIdx, 1);
+    }
+
+    displayAllBooks();
+}
+
+function populateLibrary() {
+    addBookToLibrary("Lord of the Rings", "J.R.R Tolkien", "Fantasy", 1077, true);
+    addBookToLibrary("The hobbit", "J.R.R Tolkien", "Fantasy", 372, true);
+    addBookToLibrary("Mistborn: The Final Empire", "Brandon Sanderson", "Fantasy", 541, true);
+    addBookToLibrary("Effective Java", "Joshua Bloch", "Programming", 412, false);
+
+    displayAllBooks()
+}
+
 showModalBtn.addEventListener('click', showModal);
 document.querySelector('#cancel-btn').addEventListener('click', () => modalDialog.close());
-
 form.addEventListener('submit', handleFormSubmit);
+
+tableContents.addEventListener('click', handleActionButton)
+
+populateLibrary();
