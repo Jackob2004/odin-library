@@ -239,11 +239,14 @@ function handleActionButton(event) {
     displayAllBooks();
 }
 
+// just for demonstration purposes
 function populateLibrary() {
     addBookToLibrary("Lord of the Rings", "J.R.R Tolkien", "Fantasy", 1077, true);
     addBookToLibrary("The hobbit", "J.R.R Tolkien", "Fantasy", 372, true);
     addBookToLibrary("Mistborn: The Final Empire", "Brandon Sanderson", "Fantasy", 541, true);
     addBookToLibrary("Effective Java", "Joshua Bloch", "Programming", 412, false);
+    addBookToLibrary("Clean code", "Rober C. Martin", "Programming", 464, false);
+    addBookToLibrary("Spring Start Here", "Laurentiu Spilca", "Programming", 416, false);
 
     displayAllBooks()
 }

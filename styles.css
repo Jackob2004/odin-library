@@ -22,14 +22,17 @@ html {
 body {
     display: flex;
     flex-direction: column;
+
     height: 100vh;
     background-color: var(--pallete-cream);
 }
 
+/* header styles */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     padding: 30px;
     margin-bottom: 40px;
     background-color: var(--pallete-light-grey);
@@ -41,24 +44,24 @@ body {
 }
 
 .header .show-modal {
+    padding: 16px 32px;
     font-weight: bold;
     border: none;
     border-radius: var(--border-radius);
     background-color: var(--pallete-green);
     color: var(--pallete-cream);
-    padding: 16px 32px;
     box-shadow: 0 8px 16px 4px #00000050;
 }
 
 /* dialog form */
 dialog {
+    padding: 50px;
     margin: auto;
     border: none;
     border-radius: var(--border-radius);
-    padding: 50px;
-    box-shadow: 4px 8px 8px #00000061;
     background-color: var(--pallete-cream);
     color: var(--pallete-dark-grey);
+    box-shadow: 4px 8px 8px #00000061;
 }
 
 form {
@@ -85,9 +88,9 @@ form div {
 
 form button {
     padding: 6px 24px;
+    font-weight: bold;
     border: none;
     border-radius: var(--border-radius);
-    font-weight: bold;
     color: var(--pallete-cream);
 }
 
@@ -105,13 +108,12 @@ label {
 }
 
 input:not([type="checkbox"]) {
+    padding: 5px 10px;
+    font-weight: 600;
     border: none;
     border-radius: var(--border-radius);
     background-color: var(--pallete-light-grey);
     color: var(--pallete-cream);
-    padding: 5px 10px;
-    font-weight: 600;
-
     outline: none;
 }
 
@@ -133,20 +135,20 @@ input[type="checkbox"] {
 table {
     --small-shadow-color: #0000004d;
 
-    margin: auto;
-    table-layout: fixed;
     width: 80%;
+    margin: auto;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    table-layout: fixed;
     border-collapse: collapse;
     border: var(--table-border);
-    letter-spacing: 1px;
-    font-size: 0.9rem;
     color: var(--pallete-cream);
     box-shadow: var(--table-shadow);
 }
 
 td, th {
-    border: 2px solid rgb(190,190,190);
     padding: 10px 20px;
+    border: 2px solid rgb(190,190,190);
 }
 
 th {
@@ -171,10 +173,10 @@ caption {
 }
 
 tbody tr:hover td:not(:has(div)) {
+    font-weight: bold;
     opacity: 0.7;
     background-color: var(--pallete-cream);
     color: var(--pallete-dark-grey);
-    font-weight: bold;
 }
 
 /* table action buttons  */
@@ -186,12 +188,12 @@ tbody tr:hover td:not(:has(div)) {
 }
 
 table button {
-    border: none;
-    border-radius: var(--border-radius);
     width: 80px;
-    color: var(--pallete-cream);
     font-weight: bold;
     font-size: 0.8rem;
+    border: none;
+    border-radius: var(--border-radius);
+    color: var(--pallete-cream);
     box-shadow: 0 8px 16px 4px #00000040;
 }
 
@@ -213,32 +215,34 @@ table button {
 }
 
 .books .pager {
-    width: 80%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    width: 80%;
 }
 
 .books .pager > div {
     display: flex;
     align-items: center;
     gap: 1rem;
+
+    padding: 5px 10px;
+    font-weight: bold;
     border: var(--table-border);
     background-color: var(--pallete-dark-grey);
     box-shadow: var(--table-shadow);
     color: var(--pallete-cream);
-    font-weight: bold;
-    padding: 5px 10px;
 }
 
 .books .pager-controls button {
+    font-size: 1.2rem;
     border: none;
     background-color: transparent;
     color: var(--pallete-cream);
-    font-size: 1.2rem;
 }
 
-/* general */
+/* other */
 button:hover {
     cursor: pointer;
     opacity: 0.7;
