@@ -41,7 +41,7 @@
         </form>
     </dialog>
 
-    <div class="books-container">
+    <div class="books">
         <table>
             <caption>List of books in your virtual library. Use action buttons to edit the list.</caption>
 
@@ -62,9 +62,16 @@
         </table>
 
         <div class="pager">
-            <button id="previous-btn">⬅</button>
-            <output>1</output>
-            <button id="next-btn">➡</button>
+            <div class="pager-info">
+                <p>Items in total: </p>
+                <output></output>
+            </div>
+
+            <div class="pager-controls">
+                <button id="previous-btn">⬅</button>
+                <output>1</output>
+                <button id="next-btn">➡</button>
+            </div>
         </div>
     </div>
 

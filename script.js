@@ -3,7 +3,9 @@ const tableContents = document.querySelector('table tbody');
 const modalDialog = document.querySelector('dialog');
 const showModalBtn = document.querySelector('button.show-modal');
 const form = document.querySelector('form');
-const pagerOutput = document.querySelector('output');
+
+const currPageOutput = document.querySelector('.pager-controls output');
+const totalItemsOutput = document.querySelector('.pager-info output');
 
 const myLibrary = [];
 
@@ -12,8 +14,8 @@ const pager = {
     currPage: 1,
     /**
      *
-     * @param {Array} allElements - The complete array of elements to paginate
-     * @returns {Array} An array containing the elements for the current page
+     * @param {array} allElements - The complete array of elements to paginate
+     * @returns {array} An array containing the elements for the current page
      */
     getCurrentPage: function (allElements) {
         const pageElements = [];
@@ -43,7 +45,7 @@ const pager = {
     },
     /**
      *
-     * @param {Array} allElements - The complete array of elements to paginate
+     * @param {array} allElements - The complete array of elements to paginate
      * @returns {boolean} True if successfully moved to next page, false if already at last page
      */
     nextPage: function (allElements) {
@@ -58,7 +60,7 @@ const pager = {
     },
     /**
      *
-     * @param {Array} allElements - The complete array of elements to paginate
+     * @param {array} allElements - The complete array of elements to paginate
      * @returns {boolean} True if current page is valid, false otherwise
      */
     isCurrentPageValid: function (allElements) {
@@ -169,6 +171,9 @@ function displayAllBooks() {
         const tableRow = creatTableRow(book);
         tableContents.appendChild(tableRow);
     }
+
+    currPageOutput.textContent = pager.currPage;
+    totalItemsOutput.textContent = "" + myLibrary.length;
 }
 
 function handleFormSubmit() {
@@ -198,7 +203,6 @@ function deleteBook(bookIdx) {
     if (pager.isCurrentPageValid(myLibrary)) return;
 
     pager.prevPage();
-    pagerOutput.textContent = pager.currPage;
 }
 
 /**
@@ -240,14 +244,12 @@ tableContents.addEventListener('click', handleActionButton)
 document.querySelector('#previous-btn').addEventListener('click', () => {
     if (pager.prevPage()) {
         displayAllBooks();
-        pagerOutput.textContent = pager.currPage;
     }
 });
 
 document.querySelector('#next-btn').addEventListener('click', () => {
     if (pager.nextPage(myLibrary)) {
         displayAllBooks();
-        pagerOutput.textContent = pager.currPage;
     }
 });
 

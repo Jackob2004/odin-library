@@ -6,6 +6,13 @@
     --pallete-green: #376b40;
 
     --border-radius: 15px;
+
+    --table-border: 10px ridge rgb(200,200,200);
+    --table-shadow-part: #0000004d;
+    --table-shadow: 0 0 20px #00000080,
+    0 10px 20px var(--table-shadow-part),
+    0 20px 20px var(--table-shadow-part),
+    0 30px 20px var(--table-shadow-part);
 }
 
 html {
@@ -130,14 +137,11 @@ table {
     table-layout: fixed;
     width: 80%;
     border-collapse: collapse;
-    border: 10px ridge rgb(200,200,200);
+    border: var(--table-border);
     letter-spacing: 1px;
     font-size: 0.9rem;
     color: var(--pallete-cream);
-    box-shadow: 0 0 20px #00000080,
-    0 10px 20px var(--small-shadow-color),
-    0 20px 20px var(--small-shadow-color),
-    0 30px 20px var(--small-shadow-color);
+    box-shadow: var(--table-shadow);
 }
 
 td, th {
@@ -199,6 +203,42 @@ table button {
     background-color: grey;
 }
 
+/* pager styles */
+
+.books {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+}
+
+.books .pager {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.books .pager > div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: var(--table-border);
+    background-color: var(--pallete-dark-grey);
+    box-shadow: var(--table-shadow);
+    color: var(--pallete-cream);
+    font-weight: bold;
+    padding: 5px 10px;
+}
+
+.books .pager-controls button {
+    border: none;
+    background-color: transparent;
+    color: var(--pallete-cream);
+    font-size: 1.2rem;
+}
+
+/* general */
 button:hover {
     cursor: pointer;
     opacity: 0.7;
