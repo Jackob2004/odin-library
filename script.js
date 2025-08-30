@@ -3,8 +3,70 @@ const tableContents = document.querySelector('table tbody');
 const modalDialog = document.querySelector('dialog');
 const showModalBtn = document.querySelector('button.show-modal');
 const form = document.querySelector('form');
+const pagerOutput = document.querySelector('output');
 
 const myLibrary = [];
+
+const pager = {
+    pageSize: 5,
+    currPage: 1,
+    /**
+     *
+     * @param {Array} allElements - The complete array of elements to paginate
+     * @returns {Array} An array containing the elements for the current page
+     */
+    getCurrentPage: function (allElements) {
+        const pageElements = [];
+
+        const firstIndex = (this.currPage - 1) * this.pageSize;
+        const possibleLastIndex = firstIndex + this.pageSize;
+        const lastIndex = (possibleLastIndex > allElements.length) ? allElements.length : possibleLastIndex;
+
+        for (let i = firstIndex; i < lastIndex; i++) {
+            pageElements.push(allElements[i]);
+        }
+
+        return pageElements;
+    },
+    /**
+     *
+     * @returns {boolean} True if successfully moved to previous page, false if already at first page
+     */
+    prevPage: function () {
+        const canGo = this.currPage - 1 > 0;
+
+        if (canGo) {
+            this.currPage -= 1;
+        }
+
+        return canGo;
+    },
+    /**
+     *
+     * @param {Array} allElements - The complete array of elements to paginate
+     * @returns {boolean} True if successfully moved to next page, false if already at last page
+     */
+    nextPage: function (allElements) {
+        const firstIndex = (this.currPage) * this.pageSize;
+        const canGo = firstIndex < allElements.length;
+
+        if (canGo) {
+            this.currPage += 1;
+        }
+
+        return canGo;
+    },
+    /**
+     *
+     * @param {Array} allElements - The complete array of elements to paginate
+     * @returns {boolean} True if current page is valid, false otherwise
+     */
+    isCurrentPageValid: function (allElements) {
+        const firstIndex = (this.currPage - 1) * this.pageSize;
+
+        return firstIndex < allElements.length;
+    },
+};
 
 /**
  *
@@ -102,7 +164,8 @@ function creatTableRow(book) {
 function displayAllBooks() {
     tableContents.innerHTML = '';
 
-    for (let book of myLibrary) {
+    const page = pager.getCurrentPage(myLibrary);
+    for (let book of page) {
         const tableRow = creatTableRow(book);
         tableContents.appendChild(tableRow);
     }
@@ -128,6 +191,18 @@ function showModal() {
 
 /**
  *
+ * @param {number} bookIdx
+ */
+function deleteBook(bookIdx) {
+    myLibrary.splice(bookIdx, 1);
+    if (pager.isCurrentPageValid(myLibrary)) return;
+
+    pager.prevPage();
+    pagerOutput.textContent = pager.currPage;
+}
+
+/**
+ *
  * @param event
  */
 function handleActionButton(event) {
@@ -139,7 +214,7 @@ function handleActionButton(event) {
     if (bookIdx < 0) return;
 
     if (event.target.classList.contains('delete-btn')) {
-        myLibrary.splice(bookIdx, 1);
+        deleteBook(bookIdx);
     } else if (event.target.classList.contains('read-btn')) {
         myLibrary[bookIdx].toggleReadStatus();
     }
@@ -161,5 +236,19 @@ document.querySelector('#cancel-btn').addEventListener('click', () => modalDialo
 form.addEventListener('submit', handleFormSubmit);
 
 tableContents.addEventListener('click', handleActionButton)
+
+document.querySelector('#previous-btn').addEventListener('click', () => {
+    if (pager.prevPage()) {
+        displayAllBooks();
+        pagerOutput.textContent = pager.currPage;
+    }
+});
+
+document.querySelector('#next-btn').addEventListener('click', () => {
+    if (pager.nextPage(myLibrary)) {
+        displayAllBooks();
+        pagerOutput.textContent = pager.currPage;
+    }
+});
 
 populateLibrary();
