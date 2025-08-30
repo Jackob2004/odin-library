@@ -143,13 +143,25 @@ function createActionButtons(bookId) {
 
 /**
  *
+ * @param {boolean} read
+ * @returns {HTMLTableCellElement} returns table cell containing visual info about book read status
+ */
+function createReadBookCell(read) {
+    const tableData = document.createElement('td');
+    tableData.textContent = read ? "✔" : "𝞦";
+
+    return tableData;
+}
+
+/**
+ *
  * @param book
  * @returns {HTMLTableRowElement}
  */
 function creatTableRow(book) {
     const tableRow = document.createElement('tr');
 
-    const keysToIterate= ["title", "author", "genre", "pages", "read"];
+    const keysToIterate= ["title", "author", "genre", "pages"];
 
     for (let key of keysToIterate) {
          const tableData = document.createElement('td');
@@ -158,6 +170,7 @@ function creatTableRow(book) {
          tableRow.appendChild(tableData);
     }
 
+    tableRow.appendChild(createReadBookCell(book.read))
     tableRow.appendChild(createActionButtons(book.id));
 
     return tableRow;
