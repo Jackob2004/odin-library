@@ -9,19 +9,21 @@ const totalItemsOutput = document.querySelector('.pager-info output');
 
 const myLibrary = [];
 
-const pager = {
-    pageSize: 5,
-    currPage: 1,
+const pager = (function () {
+    const PAGE_SIZE = 5;
+
+    let currPage = 1;
+
     /**
      *
      * @param {array} allElements - The complete array of elements to paginate
      * @returns {array} An array containing the elements for the current page
      */
-    getCurrentPage: function (allElements) {
+    function getCurrentPage(allElements) {
         const pageElements = [];
 
-        const firstIndex = (this.currPage - 1) * this.pageSize;
-        const possibleLastIndex = firstIndex + this.pageSize;
+        const firstIndex = (currPage - 1) * PAGE_SIZE;
+        const possibleLastIndex = firstIndex + PAGE_SIZE;
         const lastIndex = (possibleLastIndex > allElements.length) ? allElements.length : possibleLastIndex;
 
         for (let i = firstIndex; i < lastIndex; i++) {
@@ -29,46 +31,59 @@ const pager = {
         }
 
         return pageElements;
-    },
+    }
+
     /**
      *
      * @returns {boolean} True if successfully moved to previous page, false if already at first page
      */
-    prevPage: function () {
-        const canGo = this.currPage - 1 > 0;
+    function prevPage() {
+        const canGo = currPage - 1 > 0;
 
         if (canGo) {
-            this.currPage -= 1;
+            currPage -= 1;
         }
 
         return canGo;
-    },
+    }
+
     /**
      *
      * @param {array} allElements - The complete array of elements to paginate
      * @returns {boolean} True if successfully moved to next page, false if already at last page
      */
-    nextPage: function (allElements) {
-        const firstIndex = (this.currPage) * this.pageSize;
+    function nextPage(allElements) {
+        const firstIndex = (currPage) * PAGE_SIZE;
         const canGo = firstIndex < allElements.length;
 
         if (canGo) {
-            this.currPage += 1;
+            currPage += 1;
         }
 
         return canGo;
-    },
+    }
+
     /**
      *
      * @param {array} allElements - The complete array of elements to paginate
      * @returns {boolean} True if current page is valid, false otherwise
      */
-    isCurrentPageValid: function (allElements) {
-        const firstIndex = (this.currPage - 1) * this.pageSize;
+    function isCurrentPageValid(allElements) {
+        const firstIndex = (currPage - 1) * PAGE_SIZE;
 
         return firstIndex < allElements.length;
-    },
-};
+    }
+
+    /**
+     *
+     * @returns {number}
+     */
+    function getCurrPageNumber() {
+        return currPage;
+    }
+
+    return {getCurrentPage, prevPage, nextPage, isCurrentPageValid, getCurrPageNumber};
+})();
 
 /**
  *
@@ -185,7 +200,7 @@ function displayAllBooks() {
         tableContents.appendChild(tableRow);
     }
 
-    currPageOutput.textContent = pager.currPage;
+    currPageOutput.textContent = "" + pager.getCurrPageNumber();
     totalItemsOutput.textContent = "" + myLibrary.length;
 }
 
