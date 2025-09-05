@@ -20,13 +20,13 @@
             <p>Required fields are followed by <strong><span aria-label="required">*</span></strong>.</p>
 
             <label for="title">Title<strong><span aria-label="required">*</span></strong></label>
-            <input type="text" name="title" id="title" autofocus required>
+            <input type="text" name="title" id="title" autofocus maxlength="70" required>
 
             <label for="author">Author<strong><span aria-label="required">*</span></strong></label>
-            <input type="text" name="author" id="author" required>
+            <input type="text" name="author" id="author" maxlength="70" required>
 
             <label for="genre">Genre</label>
-            <input type="text" name="genre" id="genre">
+            <input type="text" name="genre" id="genre" maxlength="30">
 
             <label for="pages">Pages</label>
             <input type="number" name="pages" id="pages" min=1>
