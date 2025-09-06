@@ -85,34 +85,38 @@ const pager = (function () {
     return {getCurrentPage, prevPage, nextPage, isCurrentPageValid, getCurrPageNumber};
 })();
 
-/**
- *
- * @constructor
- * @param {string} title
- * @param {string} author
- * @param {string} genre
- * @param {number} pages
- * @param {boolean} read
- *
- * @throws {error} Will throw an error if called without the "new" keyword
- */
-function Book(title, author, genre, pages, read) {
-    if (!new.target) {
-        throw Error("You must use the 'new' operator to call the constructor");
+class Book {
+    #id = crypto.randomUUID();
+
+    /**
+     *
+     * @param {string} title
+     * @param {string} author
+     * @param {string} genre
+     * @param {number} pages
+     * @param {boolean} read
+     */
+    constructor(title, author, genre, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.pages = pages;
+        this.read = read;
     }
 
-    this.title = title;
-    this.author = author;
-    this.genre = genre;
-    this.pages = pages;
-    this.read = read;
+    /**
+     *
+     * @returns {`${string}-${string}-${string}-${string}-${string}`}
+     */
+    getId() {
+        return this.#id;
+    }
 
-    this.id = crypto.randomUUID();
+    toggleReadStatus() {
+        this.read = !this.read;
+    }
+
 }
-
-Book.prototype.toggleReadStatus = function() {
-    this.read = !this.read;
-};
 
 /**
  *
@@ -170,7 +174,7 @@ function createReadBookCell(read) {
 
 /**
  *
- * @param book
+ * @param {Book} book
  * @returns {HTMLTableRowElement}
  */
 function creatTableRow(book) {
@@ -186,7 +190,7 @@ function creatTableRow(book) {
     }
 
     tableRow.appendChild(createReadBookCell(book.read))
-    tableRow.appendChild(createActionButtons(book.id));
+    tableRow.appendChild(createActionButtons(book.getId()));
 
     return tableRow;
 }
@@ -241,7 +245,7 @@ function handleActionButton(event) {
     const bookId = event.target.dataset.bookId;
     if (bookId === undefined) return;
 
-    const bookIdx = myLibrary.findIndex(book => book.id === bookId);
+    const bookIdx = myLibrary.findIndex(book => book.getId() === bookId);
 
     if (bookIdx < 0) return;
 
