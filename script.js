@@ -9,6 +9,43 @@ const totalItemsOutput = document.querySelector('.pager-info output');
 
 const myLibrary = [];
 
+(function () {
+    const TITLE_MESSAGE = "The title field must be filled!";
+    const AUTHOR_MESSAGE = "The author name must be filled!";
+
+    const confirmBtn = document.querySelector('#confirm-btn');
+    const titleField = document.querySelector('#title-field');
+    const authorField = document.querySelector('#author-field');
+
+    confirmBtn.addEventListener('click', validateBeforeSubmit);
+
+    titleField.addEventListener('input', () => {
+        signalizeValidity(titleField, TITLE_MESSAGE);
+    });
+
+    authorField.addEventListener('input', () => {
+        signalizeValidity(authorField, AUTHOR_MESSAGE);
+    });
+
+    /**
+     *
+     * @param {HTMLInputElement} field
+     * @param {string} message
+     */
+    function signalizeValidity(field, message) {
+        if (field.validity.valueMissing) {
+            field.setCustomValidity(message);
+        } else {
+            field.setCustomValidity("");
+        }
+    }
+
+    function validateBeforeSubmit() {
+        signalizeValidity(titleField, TITLE_MESSAGE);
+        signalizeValidity(authorField, AUTHOR_MESSAGE);
+    }
+})();
+
 const pager = (function () {
     const PAGE_SIZE = 5;
 
